@@ -2,7 +2,7 @@
 <html lang="pt-br">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>App Garçom - Eskina do Caldinho (Pro)</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -123,7 +123,6 @@
         font-size: 13px;
       }
 
-      /* theme toggle button */
       .theme-toggle {
         width: 40px;
         height: 36px;
@@ -372,7 +371,6 @@
         margin-bottom: 6px;
         font-weight: 600;
       }
-      /* CORREÇÃO DO ESTILO DO INPUT: Usando variáveis de tema para melhor compatibilidade com o modo light */
       .mini input[type="number"],
       .mini input[type="text"],
       .mini textarea,
@@ -503,7 +501,6 @@
         outline-offset: 2px;
       }
 
-      /* small helper */
       .muted-small {
         font-size: 13px;
         color: #bbb;
@@ -517,8 +514,8 @@
       .fiscal-row input {
         padding: 8px;
         border-radius: 8px;
-        border: 1px solid #222;
-        background: #111;
+        border: 1px solid var(--muted);
+        background: var(--card);
         color: var(--text);
         width: 100%;
       }
@@ -538,20 +535,45 @@
           aria-label="Lista de mesas (use swipe)"
         ></div>
 
-        <div class="action-group" style="align-items: center">
-          <button class="action-btn" id="btnGeral" title="Visão geral">
+        <div class="action-group">
+          <button
+            class="action-btn"
+            id="btnGeral"
+            title="Visão geral"
+            aria-label="Visão geral das mesas"
+          >
             📊
           </button>
-          <button class="action-btn" id="btnComanda" title="Ver comanda">
+          <button
+            class="action-btn"
+            id="btnComanda"
+            title="Ver comanda"
+            aria-label="Ver comanda da mesa"
+          >
             🧾
           </button>
-          <button class="action-btn" id="btnImprimir" title="Imprimir">
+          <button
+            class="action-btn"
+            id="btnImprimir"
+            title="Imprimir"
+            aria-label="Imprimir comanda"
+          >
             🖨️
           </button>
-          <button class="action-btn" id="btnBackup" title="Backup (PDF)">
+          <button
+            class="action-btn"
+            id="btnBackup"
+            title="Backup (PDF)"
+            aria-label="Gerar backup em PDF"
+          >
             📦 Backup PDF
           </button>
-          <button class="action-btn" id="btnAddMesa" title="Adicionar mesas">
+          <button
+            class="action-btn"
+            id="btnAddMesa"
+            title="Adicionar mesas"
+            aria-label="Adicionar novas mesas"
+          >
             ➕ Mesa
           </button>
 
@@ -560,19 +582,26 @@
             class="theme-toggle"
             aria-pressed="false"
             title="Alternar tema"
+            aria-label="Alternar entre tema claro e escuro"
           >
             🌗
           </button>
         </div>
       </header>
 
-      <main id="conteudo">
+      <main id="conteudo" aria-live="polite">
         <h2>🍔 Selecione uma mesa para começar o pedido</h2>
       </main>
 
       <footer>
         <div class="total" id="total">Total: R$ 0,00</div>
-        <button class="btn-carrinho" id="btnVerComanda">🧾 Ver Comanda</button>
+        <button
+          class="btn-carrinho"
+          id="btnVerComanda"
+          aria-label="Ver comanda da mesa"
+        >
+          🧾 Ver Comanda
+        </button>
       </footer>
     </div>
 
@@ -587,7 +616,13 @@
           <h3 id="modalTitle">
             🧾 Comanda - Mesa <span id="modalMesa">0</span>
           </h3>
-          <button class="close-btn" id="btnFecharModal">Fechar</button>
+          <button
+            class="close-btn"
+            id="btnFecharModal"
+            aria-label="Fechar modal"
+          >
+            Fechar
+          </button>
         </div>
 
         <div id="cartContent" class="cart-list"></div>
@@ -623,6 +658,7 @@
                 font-weight: 800;
                 font-size: 14px;
               "
+              aria-label="Enviar novos itens para a cozinha"
             >
               📢 ENVIAR NOVOS ITENS P/ COZINHA
             </button>
@@ -635,12 +671,16 @@
                 type="text"
                 id="inputNomeCliente"
                 placeholder="Ex: Ana, Comanda 10"
+                aria-label="Nome do cliente ou comanda"
               />
             </div>
 
             <div class="input-group">
               <label for="selectPagamento">Método de Pagamento:</label>
-              <select id="selectPagamento">
+              <select
+                id="selectPagamento"
+                aria-label="Selecionar método de pagamento"
+              >
                 <option value="Dinheiro">Dinheiro</option>
                 <option value="Cartão">Cartão</option>
                 <option value="Pix">Pix</option>
@@ -656,6 +696,7 @@
                 min="0"
                 step="0.01"
                 value="0.00"
+                aria-label="Valor para cálculo de troco"
               />
             </div>
 
@@ -667,8 +708,12 @@
               "
             >
               <label style="display: flex; align-items: center; gap: 8px">
-                <input type="checkbox" id="chkEmitirNota" /> Incluir dados
-                fiscais na Nota / PDF
+                <input
+                  type="checkbox"
+                  id="chkEmitirNota"
+                  aria-label="Incluir dados fiscais na nota ou PDF"
+                />
+                Incluir dados fiscais na Nota / PDF
               </label>
 
               <div id="fiscalFields" style="display: none; margin-top: 8px">
@@ -678,6 +723,7 @@
                     id="fiscalName"
                     placeholder="Nome / Razão Social"
                     value="Ribbs Zn"
+                    aria-label="Nome ou razão social para nota fiscal"
                   />
                 </div>
                 <div class="fiscal-row">
@@ -686,6 +732,7 @@
                     id="fiscalCNPJ"
                     placeholder="CPF / CNPJ"
                     value="57.355.160/0001-70"
+                    aria-label="CPF ou CNPJ para nota fiscal"
                   />
                 </div>
                 <div class="fiscal-row">
@@ -694,6 +741,7 @@
                     id="fiscalAddress"
                     placeholder="Endereço"
                     value="Rua Lauro de Souza, 381 - Campo Grande, Recife/PE - CEP: 52040-370"
+                    aria-label="Endereço para nota fiscal"
                   />
                 </div>
                 <div class="fiscal-row">
@@ -701,6 +749,7 @@
                     type="email"
                     id="fiscalEmail"
                     placeholder="E-mail (opcional)"
+                    aria-label="E-mail para nota fiscal (opcional)"
                   />
                 </div>
               </div>
@@ -717,13 +766,27 @@
               margin-top: 10px;
             "
           >
-            <button class="btn-clear" id="btnLimpar">Limpar Comanda</button>
+            <button
+              class="btn-clear"
+              id="btnLimpar"
+              aria-label="Limpar comanda"
+            >
+              Limpar Comanda
+            </button>
 
             <div style="display: flex; gap: 8px">
-              <button class="btn-fechar" id="btnGerarNota">
+              <button
+                class="btn-fechar"
+                id="btnGerarNota"
+                aria-label="Gerar nota ou PDF"
+              >
                 Gerar Nota / PDF
               </button>
-              <button class="btn-fechar" id="btnFecharConta">
+              <button
+                class="btn-fechar"
+                id="btnFecharConta"
+                aria-label="Fechar conta (finalizar)"
+              >
                 FECHAR CONTA (Finalizar)
               </button>
             </div>
@@ -742,14 +805,29 @@
           "
         >
           <strong id="miniTitle">Adicionar item</strong>
-          <button class="close-btn" id="btnFecharMini">X</button>
+          <button
+            class="close-btn"
+            id="btnFecharMini"
+            aria-label="Fechar modal de adicionar item"
+          >
+            X
+          </button>
         </div>
 
         <div style="margin-top: 8px" id="miniContent">
-          <label>Item</label>
+          <label for="miniItemName">Item</label>
           <div
             id="miniItemName"
             style="font-weight: 700; margin-bottom: 8px"
+          ></div>
+          <div
+            id="miniDescricao"
+            style="
+              color: #bbb;
+              margin-bottom: 8px;
+              font-size: 0.95em;
+              display: none;
+            "
           ></div>
 
           <div id="ingredientesSection" style="display: none">
@@ -763,18 +841,39 @@
             </div>
           </div>
 
-          <label>Quantidade</label>
-          <input id="miniQty" type="number" min="1" value="1" />
-          <label style="margin-top: 8px">Observação (opcional)</label>
+          <label for="miniQty">Quantidade</label>
+          <input
+            id="miniQty"
+            type="number"
+            min="1"
+            value="1"
+            aria-label="Quantidade do item"
+          />
+          <label for="miniObs" style="margin-top: 8px"
+            >Observação (opcional)</label
+          >
           <textarea
             id="miniObs"
             rows="2"
             placeholder="Ex: sem cebola, ponto, etc."
+            aria-label="Observações sobre o item"
           ></textarea>
 
           <div class="row" style="margin-top: 10px; align-items: center">
-            <button class="cancel" id="btnCancelar">Cancelar</button>
-            <button class="ok" id="btnAdicionar">Adicionar</button>
+            <button
+              class="cancel"
+              id="btnCancelar"
+              aria-label="Cancelar adição do item"
+            >
+              Cancelar
+            </button>
+            <button
+              class="ok"
+              id="btnAdicionar"
+              aria-label="Adicionar item à comanda"
+            >
+              Adicionar
+            </button>
             <div
               id="precoAdicionais"
               style="font-weight: 700; color: var(--accent); margin-left: auto"
@@ -790,7 +889,13 @@
       <div class="modal" style="max-width: 520px">
         <div class="modal-header">
           <h3>📊 Visão Geral das Mesas</h3>
-          <button class="close-btn" id="btnFecharOverview">Fechar</button>
+          <button
+            class="close-btn"
+            id="btnFecharOverview"
+            aria-label="Fechar visão geral"
+          >
+            Fechar
+          </button>
         </div>
         <div style="margin-top: 10px">
           <div class="overview" id="overviewList"></div>
@@ -822,7 +927,6 @@
       const MAX_MESAS = 80;
       const FIXED_MESAS = 4;
 
-      // Dados fiscais da loja (fixos conforme você informou)
       const LOJA = {
         nome: "Ribbs Zn",
         cnpj: "57.355.160/0001-70",
@@ -836,13 +940,12 @@
       let tempAdd = { nome: null, preco: 0, ehHamburguerCostela: false };
       let originalMiniHTML = null;
 
-      // cardápio (mantido)
       const cardapio = {
         "Destilados - Gin": [
           ["Gordon (litro)", 99.99],
           ["Gordon (dose)", 7.99],
           ["Tanqueray (litro)", 159.0],
-          ["Tanqueray (dose)", 9.99]
+          ["Tanqueray (dose)", 9.99],
         ],
         "Destilados - Whisky": [
           ["Old Par (litro)", 169.99],
@@ -850,7 +953,7 @@
           ["Black White (litro)", 89.0],
           ["Black White (dose)", 6.99],
           ["Red Label (litro)", 119.99],
-          ["Red Label (dose)", 7.49]
+          ["Red Label (dose)", 7.49],
         ],
         "Destilados - Vodka": [
           ["Orloff (litro)", 54.99],
@@ -858,7 +961,7 @@
           ["Smirnoff (litro)", 69.9],
           ["Smirnoff (dose)", 6.99],
           ["Campari (litro)", 89.0],
-          ["Campari (dose)", 6.9]
+          ["Campari (dose)", 6.9],
         ],
         "Destilados - Cachaça": [
           ["Bananinha (litro)", 84.99],
@@ -869,12 +972,19 @@
           ["Matuta (quarentão)", 19.99],
           ["Matuta (dose)", 3.99],
           ["Alcatrão (dose)", 9.99],
-          ["Bacardi (dose)", 5.9]
+          ["Bacardi (dose)", 5.9],
         ],
-
-        "Petiscos": [
-          ["Picanha do Eskina", 79.0, "Picanha, macaxeira temperada e batata frita na casa."],
-          ["Carne do Sol Cremosa", 48.99, "Carne do sol acebolada com purê de batata e queijo coalho."],
+        Petiscos: [
+          [
+            "Picanha do Eskina",
+            79.0,
+            "Picanha, macaxeira temperada e batata frita na casa.",
+          ],
+          [
+            "Carne do Sol Cremosa",
+            48.99,
+            "Carne do sol acebolada com purê de batata e queijo coalho.",
+          ],
           ["Carne do Sol Acebolada c/ Fritas", 35.99],
           ["Asinha e Coxinha Crocante c/ Fritas", 33.99],
           ["Camarão ao Alho e Óleo", 33.99],
@@ -891,13 +1001,20 @@
           ["Batata Frita Tradicional (200g)", 17.99],
           ["Batata Frita c/ Costela", 27.99],
           ["Calabresa c/ Batata Frita", 25.99],
-          ["Tripinha Suína (200g)", 21.99, "Acompanha vinagre, farofa temperada e limão."],
+          [
+            "Tripinha Suína (200g)",
+            21.99,
+            "Acompanha vinagre, farofa temperada e limão.",
+          ],
           ["Panceta", 17.99, "Acompanha vinagre, farofa temperada e limão."],
           ["Tôrresmo Super Crocante (porção)", 25.99],
-          ["Posta de Peixe (atum) c/ Fritas", 54.99, "Acompanha batata frita e salada."]
+          [
+            "Posta de Peixe (atum) c/ Fritas",
+            54.99,
+            "Acompanha batata frita e salada.",
+          ],
         ],
-
-        "Espetinhos": [
+        Espetinhos: [
           ["Salsichão", 6.0],
           ["Pão de Alho", 6.0],
           ["Carne", 10.0],
@@ -906,15 +1023,13 @@
           ["Frango", 10.0],
           ["Frango c/ Queijo", 12.0],
           ["Frango c/ Bacon", 12.0],
-          ["Coração", 8.0]
+          ["Coração", 8.0],
         ],
-
         "Self Service": [
           ["300ml", 13.0, "Consultar caldos disponíveis."],
-          ["200ml", 11.0, "Consultar caldos disponíveis."]
+          ["200ml", 11.0, "Consultar caldos disponíveis."],
         ],
-
-        "Drinks": [
+        Drinks: [
           ["Caipirinha (Cachaça)", 9.99],
           ["Caipirinha c/ Frutas (Cachaça)", 11.99],
           ["Caipiroska (Vodka)", 13.9],
@@ -926,9 +1041,8 @@
           ["Sex on the Beach", 18.9],
           ["Blue Lagoon", 18.9],
           ["Cuba Libre", 15.9],
-          ["Soda Italiana", 17.9]
+          ["Soda Italiana", 17.9],
         ],
-
         "Cervejas (600ml)": [
           ["Heineken", 15.49],
           ["Stella", 13.99],
@@ -936,28 +1050,25 @@
           ["Amstel", 10.99],
           ["Eisenbahn", 10.99],
           ["Brahma", 9.99],
-          ["Devassa", 9.99]
+          ["Devassa", 9.99],
         ],
-
         "Long Neck": [
           ["Heineken", 9.99],
           ["Heineken (zero álcool)", 9.99],
           ["Corona", 9.99],
           ["Ice Cabaré", 8.99],
           ["Eisenbahn", 8.49],
-          ["Budweiser", 8.49]
+          ["Budweiser", 8.49],
         ],
-
         "Sucos da Fruta": [
           ["Limão (jarra)", 16.99],
           ["Limão (copo)", 8.99],
           ["Laranja (jarra)", 19.99],
           ["Laranja (copo)", 9.99],
           ["Morango (jarra)", 19.99],
-          ["Morango (copo)", 12.99]
+          ["Morango (copo)", 12.99],
         ],
-
-        "Diversos": [
+        Diversos: [
           ["Água mineral com gás 500ml", 3.99],
           ["Água mineral sem gás 500ml", 3.99],
           ["Água tônica lata", 5.99],
@@ -965,8 +1076,8 @@
           ["Antártica 1 litro", 9.99],
           ["Refrigerante lata", 5.99],
           ["Coca-Cola KS 290ml", 7.99],
-          ["H2O (tradicional ou limoneto)", 6.49]
-        ]
+          ["H2O (tradicional ou limoneto)", 6.49],
+        ],
       };
 
       const ingredientesFree = ["Alface", "Tomate", "Cebola caramelizada"];
@@ -984,15 +1095,10 @@
       /* ---------------------------
              util helpers
              --------------------------- */
-      function $$(sel, ctx = document) {
-        return ctx.querySelector(sel);
-      }
-      function $$$(sel, ctx = document) {
-        return Array.from(ctx.querySelectorAll(sel));
-      }
-      function formatPrice(v) {
-        return `R$ ${v.toFixed(2)}`;
-      }
+      const $$ = (sel, ctx = document) => ctx.querySelector(sel);
+      const $$$ = (sel, ctx = document) =>
+        Array.from(ctx.querySelectorAll(sel));
+      const formatPrice = (v) => `R$ ${Number(v).toFixed(2)}`;
 
       function salvarDados() {
         try {
@@ -1000,21 +1106,22 @@
           localStorage.setItem(MESA_ATIVA_KEY, mesaSelecionada ?? "");
         } catch (e) {
           console.error("Erro ao salvar:", e);
+          mostrarToast("Erro ao salvar dados", "error");
         }
       }
 
       function carregarDados() {
         try {
           const dados = localStorage.getItem(KEY);
-          if (dados) comandas = JSON.parse(dados);
-          else {
-            comandas = {};
-            for (let i = 1; i <= FIXED_MESAS; i++) comandas[i] = [];
+          comandas = dados ? JSON.parse(dados) : {};
+          for (let i = 1; i <= FIXED_MESAS; i++) {
+            if (!comandas[i]) comandas[i] = [];
           }
           const mesa = localStorage.getItem(MESA_ATIVA_KEY);
-          if (mesa) mesaSelecionada = parseInt(mesa);
+          mesaSelecionada = mesa ? parseInt(mesa) : null;
         } catch (e) {
           console.error("Erro ao carregar:", e);
+          mostrarToast("Erro ao carregar dados", "error");
         }
       }
 
@@ -1022,6 +1129,7 @@
         const toast = document.createElement("div");
         toast.className = `toast ${tipo}`;
         toast.textContent = msg;
+        toast.setAttribute("role", "alert");
         document.body.appendChild(toast);
         setTimeout(() => toast.classList.add("show"), 100);
         setTimeout(() => {
@@ -1043,10 +1151,19 @@
           btn.dataset.mesa = i;
           btn.type = "button";
           btn.textContent = `Mesa ${i}`;
+          btn.setAttribute("aria-label", `Selecionar Mesa ${i}`);
           btn.addEventListener("click", () => selecionarMesa(i));
           if (i === mesaSelecionada) btn.classList.add("active");
           mesasWrap.appendChild(btn);
         }
+      }
+
+      function selecionarMesa(num) {
+        mesaSelecionada = num;
+        if (!comandas[num]) comandas[num] = [];
+        salvarDados();
+        renderMesas();
+        carregarCardapio();
       }
 
       function adicionarMesas(qtd) {
@@ -1064,27 +1181,39 @@
              carregar cardapio
              --------------------------- */
       function carregarCardapio() {
-        if (!mesaSelecionada) return;
         const main = $$("#conteudo");
-        main.innerHTML = `<h2>🪑 Mesa ${mesaSelecionada}</h2>`;
-        for (const cat in cardapio) {
+        main.innerHTML = mesaSelecionada
+          ? `<h2>🪑 Mesa ${mesaSelecionada}</h2>`
+          : `<h2>🍔 Selecione uma mesa para começar o pedido</h2>`;
+
+        if (!mesaSelecionada) return;
+
+        for (const [cat, items] of Object.entries(cardapio)) {
           const divCat = document.createElement("div");
           divCat.className = "categoria";
           divCat.innerHTML = `<h3>${cat}</h3>`;
-          cardapio[cat].forEach((arr) => { const nome = arr[0]; const preco = arr[1]; const ehHamburguer = typeof arr[2] === 'boolean' ? arr[2] : false; const descricao = typeof (arr[2]) === 'string' ? arr[2] : (typeof(arr[3]) === 'string' ? arr[3] : null);
+
+          items.forEach(([nome, preco, desc = null]) => {
             const item = document.createElement("div");
             item.className = "item";
-            const nomeEl = document.createElement("div");
-            nomeEl.className = "nome";
-            nomeEl.textContent = nome;
-            const precoEl = document.createElement("div");
-            precoEl.className = "preco";
-            precoEl.textContent = formatPrice(preco);
-            item.appendChild(nomeEl);
-            item.appendChild(precoEl);
-            item.addEventListener("click", () => abrirMini(nome, preco, ehHamburguer, descricao));
+            item.innerHTML = `
+              <div class="nome">${nome}${
+              desc ? `<br><small>${desc}</small>` : ""
+            }</div>
+              <div class="preco">${formatPrice(preco)}</div>
+            `;
+            item.addEventListener("click", () => {
+              console.log("Item clicado:", { nome, preco, desc });
+              abrirMini(
+                nome,
+                preco,
+                nome.includes("Hamburguer") || nome === "Smash simples",
+                desc
+              );
+            });
             divCat.appendChild(item);
           });
+
           main.appendChild(divCat);
         }
         mostrarResumo();
@@ -1094,34 +1223,49 @@
              mini modal adicionar item
              --------------------------- */
       function abrirMini(nome, preco, ehHamburguer = false, descricao = null) {
+        console.log("Abrindo mini modal:", {
+          nome,
+          preco,
+          ehHamburguer,
+          descricao,
+        });
         if (!mesaSelecionada) {
           mostrarToast("Selecione uma mesa primeiro", "error");
           return;
         }
+        if (!comandas[mesaSelecionada]) {
+          comandas[mesaSelecionada] = [];
+        }
         tempAdd = { nome, preco, ehHamburguerCostela: ehHamburguer };
-        $$("#miniItemName").textContent = nome;
-        // descrição (exibida acima do campo observação quando fornecida)
-        const existingDesc = $$("#miniDescricao");
-        if (!existingDesc) {
-          const d = document.createElement('div');
-          d.id = 'miniDescricao';
-          d.style = 'color:#bbb; margin-bottom:8px; font-size:0.95em;';
-          $$("#miniItemName").insertAdjacentElement('afterend', d);
+        const miniItemName = $$("#miniItemName");
+        const miniDescricao = $$("#miniDescricao");
+        const miniQty = $$("#miniQty");
+        const miniObs = $$("#miniObs");
+
+        if (!miniItemName || !miniQty || !miniObs) {
+          console.error("Elementos do modal não encontrados:", {
+            miniItemName,
+            miniQty,
+            miniObs,
+          });
+          mostrarToast("Erro ao abrir modal de item", "error");
+          return;
         }
-        if (descricao) {
-          $$("#miniDescricao").textContent = descricao;
-          $$("#miniDescricao").style.display = 'block';
-        } else {
-          $$("#miniDescricao").style.display = 'none';
-        }
-        $$("#miniQty").value = 1;
-        $$("#miniObs").value = "";
+
+        miniItemName.textContent = nome || "Item desconhecido";
+        miniDescricao.textContent = descricao || "";
+        miniDescricao.style.display = descricao ? "block" : "none";
+        miniQty.value = 1;
+        miniObs.value = "";
         adicionaisPreco = 0;
 
         const miniContent = $$("#miniContent");
-        // Garante que o conteúdo original de 'adicionar item' está ativo
-        if (!originalMiniHTML) originalMiniHTML = miniContent.innerHTML;
-        miniContent.innerHTML = originalMiniHTML; // Recarrega o conteúdo padrão de adicionar item
+        if (!originalMiniHTML) {
+          originalMiniHTML = miniContent.innerHTML;
+          console.log("Salvando originalMiniHTML:", originalMiniHTML);
+        } else {
+          miniContent.innerHTML = originalMiniHTML;
+        }
 
         const section = $$("#ingredientesSection");
         const free = $$("#freeIngredients");
@@ -1137,36 +1281,39 @@
           free.innerHTML = ingredientes
             .map(
               (ing) => `
-                <div class="checkbox-item free checked" data-nome="${ing}">
-                  <input type="checkbox" checked> <span>${ing}</span>
-                </div>`
+              <div class="checkbox-item free checked" data-nome="${ing}">
+                <input type="checkbox" checked aria-label="${ing}"> <span>${ing}</span>
+              </div>`
             )
             .join("");
 
           paid.innerHTML = adicionaisPagos
             .map(
               (add) => `
-                <div class="checkbox-item pago" data-nome="${
-                  add.nome
-                }" data-preco="${add.preco}">
-                  <input type="checkbox"> <span>${add.nome}</span>
-                  <span class="preco">+ R$ ${add.preco.toFixed(2)}</span>
-                </div>`
+              <div class="checkbox-item pago" data-nome="${
+                add.nome
+              }" data-preco="${add.preco}">
+                <input type="checkbox" aria-label="${add.nome}"> <span>${
+                add.nome
+              }</span>
+                <span class="preco">+ R$ ${add.preco.toFixed(2)}</span>
+              </div>`
             )
             .join("");
 
-          // listeners
           $$$(
             "#freeIngredients .checkbox-item, #paidAdditions .checkbox-item"
           ).forEach((item) => {
-            item.onclick = function (e) {
+            item.onclick = (e) => {
               if (e.target.type !== "checkbox") {
-                this.querySelector('input[type="checkbox"]').click();
+                const cb = item.querySelector('input[type="checkbox"]');
+                cb.checked = !cb.checked;
+                cb.dispatchEvent(new Event("change"));
               }
             };
             const cb = item.querySelector('input[type="checkbox"]');
-            cb.onchange = function () {
-              item.classList.toggle("checked", this.checked);
+            cb.onchange = () => {
+              item.classList.toggle("checked", cb.checked);
               if (item.parentElement.id === "paidAdditions")
                 calcularAdicionais();
             };
@@ -1178,13 +1325,49 @@
 
         $$("#precoAdicionais").textContent = `Adicionais: R$ 0,00`;
         $$("#miniOverlay").style.display = "flex";
+        $$("#miniOverlay").setAttribute("aria-hidden", "false");
+
+        vincularEventosMiniModal();
+      }
+
+      function vincularEventosMiniModal() {
+        const btnAdicionar = $$("#btnAdicionar");
+        const btnCancelar = $$("#btnCancelar");
+        const btnFecharMini = $$("#btnFecharMini");
+
+        if (btnAdicionar) {
+          btnAdicionar.removeEventListener("click", confirmarAdd);
+          btnAdicionar.addEventListener("click", () => {
+            console.log("Botão Adicionar clicado");
+            confirmarAdd();
+          });
+        } else {
+          console.error("Botão #btnAdicionar não encontrado");
+          mostrarToast("Erro: Botão Adicionar não encontrado", "error");
+        }
+
+        if (btnCancelar) {
+          btnCancelar.removeEventListener("click", fecharMini);
+          btnCancelar.addEventListener("click", () => {
+            console.log("Botão Cancelar clicado");
+            fecharMini();
+          });
+        }
+
+        if (btnFecharMini) {
+          btnFecharMini.removeEventListener("click", fecharMini);
+          btnFecharMini.addEventListener("click", () => {
+            console.log("Botão Fechar Mini clicado");
+            fecharMini();
+          });
+        }
       }
 
       function calcularAdicionais() {
-        adicionaisPreco = 0;
-        $$$("#paidAdditions input:checked").forEach((cb) => {
-          adicionaisPreco += parseFloat(cb.parentElement.dataset.preco || 0);
-        });
+        adicionaisPreco = Array.from($$("#paidAdditions input:checked")).reduce(
+          (sum, cb) => sum + parseFloat(cb.parentElement.dataset.preco || 0),
+          0
+        );
         $$(
           "#precoAdicionais"
         ).textContent = `Adicionais: R$ ${adicionaisPreco.toFixed(2)}`;
@@ -1192,67 +1375,98 @@
 
       function fecharMini() {
         $$("#miniOverlay").style.display = "none";
+        $$("#miniOverlay").setAttribute("aria-hidden", "true");
+        if (originalMiniHTML) {
+          $$("#miniContent").innerHTML = originalMiniHTML;
+          vincularEventosMiniModal();
+        }
       }
 
       function confirmarAdd() {
-        const qty = parseInt($$("#miniQty").value) || 1;
-        const obs = $$("#miniObs").value.trim();
-        const precoItem = tempAdd.preco;
-        const precoAdicionais = adicionaisPreco;
-        const precoFinal = precoItem + precoAdicionais;
-
-        let obsCompleta = obs;
-        let adicionais = [];
-
-        if (tempAdd.ehHamburguerCostela) {
-          const ingredientes = $$$("#freeIngredients input:checked").map(
-            (cb) => cb.parentElement.dataset.nome
-          );
-          adicionais = $$$("#paidAdditions input:checked").map((cb) => {
-            const it = cb.parentElement;
-            return {
-              nome: it.dataset.nome,
-              preco: parseFloat(it.dataset.preco),
-            };
+        try {
+          console.log("Iniciando confirmarAdd", {
+            tempAdd,
+            adicionaisPreco,
+            mesaSelecionada,
           });
 
-          const adicionaisStr = adicionais
-            .map((a) => `${a.nome} (+R$ ${a.preco.toFixed(2)})`)
-            .join(", ");
-          if (ingredientes.length) {
-            obsCompleta = obsCompleta
-              ? `${obsCompleta}; Ingredientes: ${ingredientes.join(", ")}`
-              : `Ingredientes: ${ingredientes.join(", ")}`;
+          if (!mesaSelecionada || !comandas[mesaSelecionada]) {
+            mostrarToast("Selecione uma mesa válida primeiro", "error");
+            return;
           }
-          if (adicionais.length) {
-            obsCompleta = obsCompleta
-              ? `${obsCompleta}; Adicionais Pagos: ${adicionaisStr}`
-              : `Adicionais Pagos: ${adicionaisStr}`;
+
+          if (!tempAdd || !tempAdd.nome || typeof tempAdd.preco !== "number") {
+            console.error("tempAdd inválido:", tempAdd);
+            mostrarToast("Erro: Item inválido", "error");
+            return;
           }
-        }
 
-        for (let i = 0; i < qty; i++) {
-          comandas[mesaSelecionada].push({
-            nome: tempAdd.nome,
-            preco: precoFinal,
-            obs: obsCompleta || null,
-            id: Date.now() + Math.random(),
-            timestamp: Date.now(),
-            precoBase: tempAdd.preco,
-            adicionaisPagos: adicionais,
-            enviado: false,
-          });
-        }
+          const qty = parseInt($$("#miniQty").value) || 1;
+          if (qty <= 0) {
+            mostrarToast("Quantidade deve ser maior que zero", "error");
+            return;
+          }
 
-        salvarDados();
-        atualizarTotal();
-        mostrarResumo();
-        fecharMini();
-        mostrarToast("Item adicionado! (Não enviado p/ cozinha)");
+          const obs = $$("#miniObs").value.trim();
+          const precoItem = tempAdd.preco;
+          const precoAdicionais = adicionaisPreco;
+          const precoFinal = precoItem + precoAdicionais;
+
+          let obsCompleta = obs;
+          let adicionais = [];
+
+          if (tempAdd.ehHamburguerCostela) {
+            const ingredientes = Array.from(
+              $$("#freeIngredients input:checked")
+            ).map((cb) => cb.parentElement.dataset.nome);
+            adicionais = Array.from($$("#paidAdditions input:checked")).map(
+              (cb) => ({
+                nome: cb.parentElement.dataset.nome,
+                preco: parseFloat(cb.parentElement.dataset.preco),
+              })
+            );
+
+            const adicionaisStr = adicionais
+              .map((a) => `${a.nome} (+R$ ${a.preco.toFixed(2)})`)
+              .join(", ");
+            if (ingredientes.length) {
+              obsCompleta = obsCompleta
+                ? `${obsCompleta}; Ingredientes: ${ingredientes.join(", ")}`
+                : `Ingredientes: ${ingredientes.join(", ")}`;
+            }
+            if (adicionais.length) {
+              obsCompleta = obsCompleta
+                ? `${obsCompleta}; Adicionais Pagos: ${adicionaisStr}`
+                : `Adicionais Pagos: ${adicionaisStr}`;
+            }
+          }
+
+          for (let i = 0; i < qty; i++) {
+            comandas[mesaSelecionada].push({
+              nome: tempAdd.nome,
+              preco: precoFinal,
+              obs: obsCompleta || null,
+              id: Date.now() + Math.random(),
+              timestamp: Date.now(),
+              precoBase: tempAdd.preco,
+              adicionaisPagos: adicionais,
+              enviado: false,
+            });
+          }
+
+          salvarDados();
+          atualizarTotal();
+          mostrarResumo();
+          fecharMini();
+          mostrarToast("Item adicionado! (Não enviado p/ cozinha)");
+        } catch (e) {
+          console.error("Erro em confirmarAdd:", e);
+          mostrarToast("Erro ao adicionar item", "error");
+        }
       }
 
       /* ---------------------------
-             modal adicionar mesa (NOVO)
+             modal adicionar mesa
              --------------------------- */
       function abrirModalAddMesa() {
         const current = Object.keys(comandas).length;
@@ -1269,27 +1483,27 @@
 
         miniTitle.textContent = "➕ Adicionar Novas Mesas";
         miniContent.innerHTML = `
-                    <p style="margin-top:10px; font-weight:500; color:var(--text)">
-                        Atualmente você tem ${current} mesas. Você pode adicionar no máximo ${maxAdd}.
-                    </p>
-
-                    <label style="margin-top: 15px; color: var(--text)">Quantidade de Mesas para Adicionar</label>
-                    <input id="inputQtdMesas" type="number" min="1" max="${maxAdd}" value="4" style="margin-bottom: 20px;">
-                    
-                    <div class="row" style="margin-top:20px; justify-content:flex-end">
-                        <button class="cancel" id="btnConfirmarCancel">Cancelar</button>
-                        <button class="ok" id="btnConfirmarAdd" style="font-weight:700">Adicionar Mesas</button>
-                    </div>
-                `;
+          <p style="margin-top:10px; font-weight:500; color:var(--text)">
+            Atualmente você tem ${current} mesas. Você pode adicionar no máximo ${maxAdd}.
+          </p>
+          <label for="inputQtdMesas" style="margin-top: 15px; color: var(--text)">Quantidade de Mesas para Adicionar</label>
+          <input id="inputQtdMesas" type="number" min="1" max="${maxAdd}" value="4" style="margin-bottom: 20px;" aria-label="Quantidade de mesas a adicionar">
+          <div class="row" style="margin-top:20px; justify-content:flex-end">
+            <button class="cancel" id="btnConfirmarCancel" aria-label="Cancelar adição de mesas">Cancelar</button>
+            <button class="ok" id="btnConfirmarAdd" style="font-weight:700" aria-label="Adicionar mesas">Adicionar Mesas</button>
+          </div>
+        `;
 
         $$("#miniOverlay").style.display = "flex";
+        $$("#miniOverlay").setAttribute("aria-hidden", "false");
 
         const restoreAndClose = () => {
           if (originalMiniHTML) miniContent.innerHTML = originalMiniHTML;
+          vincularEventosMiniModal();
           fecharMini();
         };
 
-        $$("#btnConfirmarAdd").onclick = function () {
+        $$("#btnConfirmarAdd").onclick = () => {
           const q = $$("#inputQtdMesas").value;
           const n = parseInt(q);
 
@@ -1300,7 +1514,6 @@
 
           const toAdd = Math.min(n, maxAdd);
           adicionarMesas(toAdd);
-
           restoreAndClose();
         };
 
@@ -1320,8 +1533,8 @@
           (s, i) => s + i.preco,
           0
         );
-        $$("#total").textContent = `Total: R$ ${total.toFixed(2)}`;
-        $$("#modalTotal").textContent = `R$ ${total.toFixed(2)}`;
+        $$("#total").textContent = formatPrice(total);
+        $$("#modalTotal").textContent = formatPrice(total);
         $$("#inputTrocoPara").min = total.toFixed(2);
       }
 
@@ -1338,14 +1551,9 @@
         div.innerHTML = "<h3>🧾 Pedido Atual</h3>";
         const agrupado = {};
         pedido.forEach((item) => {
-          const key =
-            item.nome +
-            "||" +
-            item.preco.toFixed(2) +
-            "||" +
-            (item.obs || "") +
-            "||" +
-            item.enviado;
+          const key = `${item.nome}||${item.preco.toFixed(2)}||${
+            item.obs || ""
+          }||${item.enviado}`;
           if (!agrupado[key]) agrupado[key] = { ...item, qty: 0 };
           agrupado[key].qty++;
         });
@@ -1354,17 +1562,14 @@
           const linha = document.createElement("div");
           linha.className = "pedido-item";
           const status = item.enviado ? " (Enviado)" : "";
-          linha.innerHTML = `<div><span style="font-weight:700">${
-            item.qty
-          }x</span> ${item.nome}${status} ${
-            item.obs ? `<br><small>${item.obs}</small>` : ""
-          }</div>
-                                 <div style="text-align:right">R$ ${(
-                                   item.preco * item.qty
-                                 ).toFixed(
-                                   2
-                                 )} <span class="remover" style="color:var(--danger);cursor:pointer;margin-left:8px">✖</span></div>`;
-
+          linha.innerHTML = `
+            <div><span style="font-weight:700">${item.qty}x</span> ${
+            item.nome
+          }${status}${item.obs ? `<br><small>${item.obs}</small>` : ""}</div>
+            <div style="text-align:right">${formatPrice(
+              item.preco * item.qty
+            )} <span class="remover" style="color:var(--danger);cursor:pointer;margin-left:8px" role="button" aria-label="Remover item">✖</span></div>
+          `;
           linha
             .querySelector(".remover")
             .addEventListener("click", () => removerGrupo(item));
@@ -1394,7 +1599,7 @@
              enviar p/ cozinha (apenas novos)
              --------------------------- */
       function enviarPedidosNaoEnviados() {
-        const pedidoCompleto = comandas[mesaSelecionada];
+        const pedidoCompleto = comandas[mesaSelecionada] || [];
         const novosItens = pedidoCompleto.filter((i) => !i.enviado);
         const nomeCliente =
           $$("#inputNomeCliente").value.trim() || `Mesa ${mesaSelecionada}`;
@@ -1408,8 +1613,9 @@
 
         const agrupado = {};
         novosItens.forEach((item) => {
-          const key =
-            item.nome + "||" + item.preco.toFixed(2) + "||" + (item.obs || "");
+          const key = `${item.nome}||${item.preco.toFixed(2)}||${
+            item.obs || ""
+          }`;
           if (!agrupado[key]) agrupado[key] = { ...item, qty: 0 };
           agrupado[key].qty++;
         });
@@ -1422,7 +1628,7 @@
 
         const novoPedido = {
           id: Date.now().toString(),
-          nomeCliente: nomeCliente,
+          nomeCliente,
           itens: itensParaCozinha,
           total: novosItens.reduce((s, i) => s + i.preco, 0).toFixed(2),
           codigoPedido: `M${mesaSelecionada}-${Date.now()
@@ -1435,11 +1641,17 @@
           mesa: mesaSelecionada,
         };
 
-        const pedidosCozinha = JSON.parse(
-          localStorage.getItem(PEDIDOS_KEY) || "[]"
-        );
-        pedidosCozinha.push(novoPedido);
-        localStorage.setItem(PEDIDOS_KEY, JSON.stringify(pedidosCozinha));
+        try {
+          const pedidosCozinha = JSON.parse(
+            localStorage.getItem(PEDIDOS_KEY) || "[]"
+          );
+          pedidosCozinha.push(novoPedido);
+          localStorage.setItem(PEDIDOS_KEY, JSON.stringify(pedidosCozinha));
+        } catch (e) {
+          console.error("Erro ao salvar pedidos:", e);
+          mostrarToast("Erro ao salvar pedidos para cozinha", "error");
+          return;
+        }
 
         comandas[mesaSelecionada].forEach((i) => {
           if (!i.enviado) i.enviado = true;
@@ -1456,14 +1668,14 @@
              fechar conta
              --------------------------- */
       function fecharContaFinal() {
-        const pedido = comandas[mesaSelecionada];
+        const pedido = comandas[mesaSelecionada] || [];
         const nomeCliente =
           $$("#inputNomeCliente").value.trim() || `Mesa ${mesaSelecionada}`;
         const metodoPagamento = $$("#selectPagamento").value;
         const total = pedido.reduce((s, i) => s + i.preco, 0);
 
         if (pedido.length === 0) {
-          mostrarToast("Comanda vazia. Não há nada para fechar.", "warning");
+          mostrarToast("Comanda vazia. Não necessário para fechar.", "warning");
           return;
         }
 
@@ -1479,33 +1691,39 @@
                   2
                 )}. Fechar conta mesmo assim?`
               )
-            )
+            ) {
               return;
+            }
           }
           troco = trocoPara > total ? trocoPara - total : 0;
         }
 
-        // salva histórico simples
-        const historico = JSON.parse(
-          localStorage.getItem("historico_caixa") || "[]"
-        );
-        historico.push({
-          mesa: mesaSelecionada,
-          nomeCliente,
-          total: total.toFixed(2),
-          metodoPagamento,
-          troco: troco.toFixed(2),
-          timestamp: Date.now(),
-        });
-        localStorage.setItem("historico_caixa", JSON.stringify(historico));
+        try {
+          const historico = JSON.parse(
+            localStorage.getItem("historico_caixa") || "[]"
+          );
+          historico.push({
+            mesa: mesaSelecionada,
+            nomeCliente,
+            total: total.toFixed(2),
+            metodoPagamento,
+            troco: troco.toFixed(2),
+            timestamp: Date.now(),
+          });
+          localStorage.setItem("historico_caixa", JSON.stringify(historico));
+        } catch (e) {
+          console.error("Erro ao salvar histórico:", e);
+          mostrarToast("Erro ao salvar histórico de fechamento", "error");
+          return;
+        }
 
         comandas[mesaSelecionada] = [];
         salvarDados();
         carregarCardapio();
         fecharModal();
         mostrarToast(
-          `Conta de ${nomeCliente} finalizada! Total: R$ ${total.toFixed(2)} ${
-            troco > 0 ? `- Troco: R$ ${troco.toFixed(2)}` : ""
+          `Conta de ${nomeCliente} finalizada! Total: ${formatPrice(total)}${
+            troco > 0 ? ` - Troco: ${formatPrice(troco)}` : ""
           }`
         );
       }
@@ -1518,6 +1736,16 @@
           mostrarToast("Selecione uma mesa primeiro", "error");
           return;
         }
+
+        // **********************************************
+        // CORREÇÃO: Adicionando a verificação de comanda vazia
+        // para impedir a abertura do modal e mostrar um aviso.
+        // **********************************************
+        if (comandas[mesaSelecionada].length === 0) {
+          mostrarToast("A comanda está vazia!", "warning");
+          return;
+        }
+
         $$("#inputNomeCliente").value = `Mesa ${mesaSelecionada}`;
         renderModal();
         $$("#modalMesa").textContent = mesaSelecionada;
@@ -1538,10 +1766,12 @@
         const btnEnviar = $$("#btnEnviarParcial");
         const novosItens = pedido.filter((i) => !i.enviado).length;
 
+        // Esta parte do código (abaixo) só é mais importante se a verificação
+        // em abrirModal fosse removida, mas mantê-la torna o app mais robusto.
         if (!pedido.length) {
           container.innerHTML =
             '<div style="padding:12px;color:#bbb">Comanda vazia</div>';
-          $$("#modalTotal").textContent = "R$ 0,00";
+          $$("#modalTotal").textContent = formatPrice(0);
           $$("#btnFecharConta").disabled = true;
           btnEnviar.style.display = "none";
           return;
@@ -1557,53 +1787,40 @@
 
         const agrupado = {};
         pedido.forEach((item) => {
-          const key =
-            item.nome +
-            "||" +
-            item.preco.toFixed(2) +
-            "||" +
-            (item.obs || "") +
-            "||" +
-            item.enviado;
+          const key = `${item.nome}||${item.preco.toFixed(2)}||${
+            item.obs || ""
+          }||${item.enviado}`;
           if (!agrupado[key]) agrupado[key] = { ...item, qty: 0 };
           agrupado[key].qty++;
         });
 
         container.innerHTML = Object.values(agrupado)
-          .map((item) => {
-            const status = item.enviado
-              ? ' <span style="color:#00c853">(Enviado)</span>'
-              : ' <span style="color:#ff9800">(Novo)</span>';
-            return `
-                <div class="cart-row">
-                  <div class="cart-left">
-                    <div class="qty">${item.qty}</div>
-                    <div>${item.nome}${status}${
-              item.obs ? "<br><small>" + item.obs + "</small>" : ""
-            }</div>
-                  </div>
-                  <div class="cart-right">
-                    <div class="cart-price">R$ ${(
-                      item.preco * item.qty
-                    ).toFixed(2)}</div>
-                    <button class="btn-small" data-rem-key="${encodeURIComponent(
-                      item.nome +
-                        "||" +
-                        item.preco.toFixed(2) +
-                        "||" +
-                        (item.obs || "") +
-                        "||" +
-                        item.enviado
-                    )}">Remover</button>
-                  </div>
-                </div>`;
-          })
+          .map(
+            (item) => `
+            <div class="cart-row">
+              <div class="cart-left">
+                <div class="qty">${item.qty}</div>
+                <div>${item.nome}${
+              item.enviado
+                ? ' <span style="color:#00c853">(Enviado)</span>'
+                : ' <span style="color:#ff9800">(Novo)</span>'
+            }${item.obs ? `<br><small>${item.obs}</small>` : ""}</div>
+              </div>
+              <div class="cart-right">
+                <div class="cart-price">${formatPrice(
+                  item.preco * item.qty
+                )}</div>
+                <button class="btn-small" data-rem-key="${encodeURIComponent(
+                  key
+                )}" aria-label="Remover item ${item.nome}">Remover</button>
+              </div>
+            </div>`
+          )
           .join("");
 
-        // bind remove buttons
         $$$(".btn-small[data-rem-key]").forEach((btn) => {
-          btn.onclick = function () {
-            const raw = decodeURIComponent(this.dataset.remKey);
+          btn.onclick = () => {
+            const raw = decodeURIComponent(btn.dataset.remKey);
             const [nome, precoStr, obs, enviadoStr] = raw.split("||");
             const precoFinal = parseFloat(precoStr);
             const enviadoFinal = enviadoStr === "true";
@@ -1623,7 +1840,7 @@
           };
         });
 
-        $$("#modalTotal").textContent = `R$ ${total.toFixed(2)}`;
+        $$("#modalTotal").textContent = formatPrice(total);
       }
 
       /* ---------------------------
@@ -1635,25 +1852,34 @@
         const list = $$("#overviewList");
         list.innerHTML = "";
         let totalGeral = 0;
-        Object.keys(comandas).forEach((key) => {
-          const arr = comandas[key] || [];
-          const total = arr.reduce((s, i) => s + i.preco, 0);
-          totalGeral += total;
-          const card = document.createElement("div");
-          card.className = "mesa-card";
-          card.innerHTML = `<h4>Mesa ${key}</h4><div class="small">${
-            arr.length
-          } itens</div><div style="font-weight:800;margin-top:6px">${formatPrice(
-            total
-          )}</div>`;
-          card.addEventListener("click", () => {
-            selecionarMesa(parseInt(key));
-            fecharOverview();
+        Object.keys(comandas)
+          .sort((a, b) => a - b)
+          .forEach((key) => {
+            const arr = comandas[key] || [];
+            const total = arr.reduce((s, i) => s + i.preco, 0);
+            totalGeral += total;
+            const card = document.createElement("div");
+            card.className = `mesa-card${arr.length ? "" : " empty"}`;
+            card.innerHTML = `
+            <h4>Mesa ${key}</h4>
+            <div class="small">${arr.length} itens</div>
+            <div style="font-weight:800;margin-top:6px">${formatPrice(
+              total
+            )}</div>
+          `;
+            card.addEventListener("click", () => {
+              selecionarMesa(parseInt(key));
+              fecharOverview();
+            });
+            card.setAttribute(
+              "aria-label",
+              `Mesa ${key}, ${arr.length} itens, total ${formatPrice(total)}`
+            );
+            list.appendChild(card);
           });
-          list.appendChild(card);
-        });
-        $$("#overviewTotal").textContent = `R$ ${totalGeral.toFixed(2)}`;
+        $$("#overviewTotal").textContent = formatPrice(totalGeral);
       }
+
       function fecharOverview() {
         $$("#overviewOverlay").classList.remove("show");
         $$("#overviewOverlay").setAttribute("aria-hidden", "true");
@@ -1663,22 +1889,26 @@
              limpar comanda (confirm)
              --------------------------- */
       function abrirConfirmacaoLimpar() {
-        if (!mesaSelecionada) return;
+        if (!mesaSelecionada) {
+          mostrarToast("Selecione uma mesa primeiro", "error");
+          return;
+        }
         const miniTitle = $$("#miniTitle");
         const miniContent = $$("#miniContent");
         if (!originalMiniHTML) originalMiniHTML = miniContent.innerHTML;
 
         miniTitle.textContent = `⚠️ Confirmar Limpeza - Mesa ${mesaSelecionada}`;
         miniContent.innerHTML = `
-              <p style="margin-top:10px; font-weight:500; color:var(--text)">
-                Deseja <strong style="color:var(--danger)">LIMPAR</strong> a comanda da Mesa ${mesaSelecionada}?<br><small style="color:#bbb">Isto apagará o histórico local desta mesa e NÃO enviará nada para a cozinha.</small>
-              </p>
-              <div class="row" style="margin-top:20px; justify-content:space-between">
-                <button class="cancel" id="btnConfirmarCancel">Não, Cancelar</button>
-                <button class="ok" id="btnConfirmarOk" style="background:var(--danger); color:white; font-weight:700">Sim, Limpar Comanda</button>
-              </div>
-            `;
-        $$("#btnConfirmarOk").onclick = function () {
+          <p style="margin-top:10px; font-weight:500; color:var(--text)">
+            Deseja <strong style="color:var(--danger)">LIMPAR</strong> a comanda da Mesa ${mesaSelecionada}?<br>
+            <small style="color:#bbb">Isto apagará o histórico local desta mesa e NÃO enviará nada para a cozinha.</small>
+          </p>
+          <div class="row" style="margin-top:20px; justify-content:space-between">
+            <button class="cancel" id="btnConfirmarCancel" aria-label="Cancelar limpeza da comanda">Não, Cancelar</button>
+            <button class="ok" id="btnConfirmarOk" style="background:var(--danger); color:white; font-weight:700" aria-label="Confirmar limpeza da comanda">Sim, Limpar Comanda</button>
+          </div>
+        `;
+        $$("#btnConfirmarOk").onclick = () => {
           comandas[mesaSelecionada] = [];
           salvarDados();
           carregarCardapio();
@@ -1686,20 +1916,20 @@
           fecharModal();
           mostrarToast(`Comanda da Mesa ${mesaSelecionada} limpa.`);
           if (originalMiniHTML) $$("#miniContent").innerHTML = originalMiniHTML;
+          vincularEventosMiniModal();
         };
-        $$("#btnConfirmarCancel").onclick = function () {
+        $$("#btnConfirmarCancel").onclick = () => {
           if (originalMiniHTML) $$("#miniContent").innerHTML = originalMiniHTML;
+          vincularEventosMiniModal();
           fecharMini();
         };
-        $$("#btnFecharMini").onclick = function () {
+        $$("#btnFecharMini").onclick = () => {
           if (originalMiniHTML) $$("#miniContent").innerHTML = originalMiniHTML;
+          vincularEventosMiniModal();
           fecharMini();
         };
         $$("#miniOverlay").style.display = "flex";
-      }
-
-      function limparMesa() {
-        if (!mesaSelecionada) return abrirConfirmacaoLimpar();
+        $$("#miniOverlay").setAttribute("aria-hidden", "false");
       }
 
       /* ---------------------------
@@ -1710,7 +1940,7 @@
           const { jsPDF } = window.jspdf;
           const doc = new jsPDF({ unit: "pt", format: "a4" });
           const margin = 40;
-          const startY = 60;
+          let y = 60;
           doc.setFontSize(12);
           doc.text(
             `Backup de Comandas - ${new Date().toLocaleString()}`,
@@ -1718,12 +1948,9 @@
             30
           );
           doc.text(`${LOJA.nome} — CNPJ: ${LOJA.cnpj}`, margin, 46);
-          doc.text(`${LOJA.endereco}`, margin, 62);
+          doc.text(LOJA.endereco, margin, 62);
 
-          let y = startY;
-          const tablesPromises = [];
           const mesasKeys = Object.keys(comandas).sort((a, b) => a - b);
-
           for (const key of mesasKeys) {
             const arr = comandas[key] || [];
             const total = arr.reduce((s, i) => s + i.preco, 0);
@@ -1733,8 +1960,8 @@
             }
             doc.setFontSize(11);
             doc.text(
-              `Mesa ${key} — Itens: ${arr.length} — Total: R$ ${total.toFixed(
-                2
+              `Mesa ${key} — Itens: ${arr.length} — Total: ${formatPrice(
+                total
               )}`,
               margin,
               y
@@ -1745,10 +1972,9 @@
               const rows = arr.map((it) => [
                 new Date(it.timestamp).toLocaleString(),
                 it.nome,
-                it.obs ? it.obs : "-",
-                `R$ ${it.preco.toFixed(2)}`,
+                it.obs || "-",
+                formatPrice(it.preco),
               ]);
-              // use autoTable
               doc.autoTable({
                 head: [["Data/Hora", "Item", "Obs", "Valor"]],
                 body: rows,
@@ -1770,15 +1996,13 @@
           doc.save(fileName);
           mostrarToast("Backup PDF gerado e baixado.");
         } catch (e) {
-          console.error(e);
+          console.error("Erro ao gerar backup PDF:", e);
           mostrarToast("Erro ao gerar backup PDF", "error");
         }
       }
 
       /* ---------------------------
              gerar PDF da comanda (individual)
-             - Gera PDF com cabeçalho da loja, dados do cliente (se marcado),
-               lista de itens agrupada, e total. Abre opção para imprimir.
              --------------------------- */
       function gerarComandaPDF(opcoes = { imprimirAfter: false }) {
         try {
@@ -1790,7 +2014,6 @@
           const pedido = comandas[mesa] || [];
           const total = pedido.reduce((s, i) => s + i.preco, 0);
 
-          // Dados fiscais do formulário, se marcado
           const incluirFiscal = $$("#chkEmitirNota").checked;
           const fiscal = {
             nome: incluirFiscal
@@ -1812,7 +2035,6 @@
           doc.text(LOJA.endereco, margin, titleY + 32);
 
           const dateStr = new Date().toLocaleString();
-          doc.setFontSize(10);
           doc.text(`Mesa: ${mesa}`, 420, titleY);
           doc.text(`Data: ${dateStr}`, 420, titleY + 14);
 
@@ -1846,15 +2068,11 @@
             return;
           }
 
-          // Agrupar itens por nome+obs+preco
           const agrupado = {};
           pedido.forEach((item) => {
-            const key =
-              item.nome +
-              "||" +
-              item.preco.toFixed(2) +
-              "||" +
-              (item.obs || "");
+            const key = `${item.nome}||${item.preco.toFixed(2)}||${
+              item.obs || ""
+            }`;
             if (!agrupado[key]) agrupado[key] = { ...item, qty: 0 };
             agrupado[key].qty++;
           });
@@ -1862,8 +2080,8 @@
           const tableRows = Object.values(agrupado).map((it) => [
             it.qty,
             it.nome + (it.obs ? `\n(${it.obs})` : ""),
-            `R$ ${it.preco.toFixed(2)}`,
-            `R$ ${(it.preco * it.qty).toFixed(2)}`,
+            formatPrice(it.preco),
+            formatPrice(it.preco * it.qty),
           ]);
 
           doc.autoTable({
@@ -1878,39 +2096,32 @@
 
           const finalY = doc.lastAutoTable.finalY + 12;
           doc.setFontSize(12);
-          doc.text(`Total: R$ ${total.toFixed(2)}`, margin, finalY);
+          doc.text(`Total: ${formatPrice(total)}`, margin, finalY);
 
           const fileName = `comanda_mesa_${mesa}_${new Date()
             .toISOString()
             .replace(/[:.]/g, "-")}.pdf`;
-          // salva e também abre em nova aba para permitir impressão manual
-          const blob = doc.output("blob");
-          const url = URL.createObjectURL(blob);
-          // cria link para download
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = fileName;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
+          doc.save(fileName);
+          mostrarToast("PDF da comanda gerado e baixado.");
 
           if (opcoes.imprimirAfter) {
-            // abre em nova aba e chama print
+            const blob = doc.output("blob");
+            const url = URL.createObjectURL(blob);
             const win = window.open(url, "_blank");
-            win && win.focus();
-            // impressão pode precisar user gesture in some browsers, best-effort:
-            setTimeout(() => {
-              try {
-                win.print();
-              } catch (e) {}
-            }, 700);
-          } else {
-            mostrarToast("PDF da comanda gerado e baixado.");
+            if (win) {
+              win.focus();
+              setTimeout(() => {
+                try {
+                  win.print();
+                } catch (e) {
+                  console.error("Erro ao tentar imprimir:", e);
+                }
+              }, 700);
+            }
+            setTimeout(() => URL.revokeObjectURL(url), 10000);
           }
-          // libera URL
-          setTimeout(() => URL.revokeObjectURL(url), 10000);
         } catch (e) {
-          console.error(e);
+          console.error("Erro ao gerar PDF da comanda:", e);
           mostrarToast("Erro ao gerar PDF da comanda", "error");
         }
       }
@@ -1920,142 +2131,52 @@
              --------------------------- */
       document.addEventListener("DOMContentLoaded", () => {
         carregarDados();
-        for (let i = 1; i <= FIXED_MESAS; i++)
-          if (!comandas[i]) comandas[i] = [];
         renderMesas();
+        carregarCardapio();
         originalMiniHTML = $$("#miniContent").innerHTML;
 
-        // header buttons
         $$("#btnGeral").addEventListener("click", abrirOverview);
         $$("#btnComanda").addEventListener("click", abrirModal);
         $$("#btnVerComanda").addEventListener("click", abrirModal);
-
         $$("#btnFecharModal").addEventListener("click", fecharModal);
         $$("#btnFecharOverview").addEventListener("click", fecharOverview);
-
-        // O botão de fechar o mini modal agora usa a função de restauração
-        const miniContent = $$("#miniContent");
-        const restoreAndClose = () => {
-          if (originalMiniHTML) miniContent.innerHTML = originalMiniHTML;
-          fecharMini();
-        };
-        $$("#btnFecharMini").addEventListener("click", restoreAndClose);
-
-        $$("#btnLimpar").addEventListener("click", limparMesa);
+        $$("#btnLimpar").addEventListener("click", abrirConfirmacaoLimpar);
         $$("#btnEnviarParcial").addEventListener(
           "click",
           enviarPedidosNaoEnviados
         );
         $$("#btnFecharConta").addEventListener("click", fecharContaFinal);
-
-        // botao backup -> agora gera PDF geral
         $$("#btnBackup").addEventListener("click", gerarBackupPDF);
-
-        // NOVO: Chama o modal customizado para adicionar mesas
         $$("#btnAddMesa").addEventListener("click", abrirModalAddMesa);
-
-        $$("#btnAdicionar").addEventListener("click", confirmarAdd);
-        $$("#btnCancelar").addEventListener("click", () => {
-          if (originalMiniHTML) $$("#miniContent").innerHTML = originalMiniHTML;
-          fecharMini();
-        });
+        $$("#btnImprimir").addEventListener("click", () =>
+          gerarComandaPDF({ imprimirAfter: true })
+        );
 
         $$("#selectPagamento").addEventListener("change", function () {
           $$("#trocoContainer").style.display =
             this.value === "Dinheiro" ? "block" : "none";
         });
 
-        // toggling fiscal fields
         $$("#chkEmitirNota").addEventListener("change", function () {
           $$("#fiscalFields").style.display = this.checked ? "block" : "none";
-          // if uncheck, restore defaults to store
-          if (!this.checked) {
-            $$("#fiscalName").value = LOJA.nome;
-            $$("#fiscalCNPJ").value = LOJA.cnpj;
-            $$("#fiscalAddress").value = LOJA.endereco;
-          }
         });
 
-        // gerar nota button (manual)
-        $$("#btnGerarNota").addEventListener("click", () => {
-          // gera PDF sem imprimir automaticamente (pois usuário pediu opção para imprimir)
-          gerarComandaPDF({ imprimirAfter: false });
+        $$("#themeToggle").addEventListener("click", () => {
+          const isLight = document.documentElement.dataset.theme === "light";
+          document.documentElement.dataset.theme = isLight ? "dark" : "light";
+          localStorage.setItem(THEME_KEY, isLight ? "dark" : "light");
+          $$("#themeToggle").setAttribute("aria-pressed", !isLight);
         });
 
-        // imprimir (botao geral - placeholder para imprimir a comanda aberta)
-        $$("#btnImprimir").addEventListener("click", () => {
-          // tenta abrir último PDF gerado? Para simplicidade, imprimirá a comanda atual em nova aba após geração
-          gerarComandaPDF({ imprimirAfter: true });
-        });
-
-        // theme
-        const savedTheme = localStorage.getItem(THEME_KEY) || "dark";
-        applyTheme(savedTheme);
-        $$("#themeToggle").addEventListener("click", toggleTheme);
-
-        // initial selection
-        if (mesaSelecionada && comandas[mesaSelecionada]?.length !== undefined)
-          selecionarMesa(mesaSelecionada);
-        else selecionarMesa(1);
-
-        // keyboard shortcuts
-        document.addEventListener("keydown", (e) => {
-          if (e.key >= "1" && e.key <= "9") {
-            const num = parseInt(e.key);
-            if (comandas[num]) selecionarMesa(num);
-          }
-          if (e.key === "Escape") {
-            fecharMini();
-            fecharModal();
-          }
-        });
-
-        mesasWrap.style.scrollBehavior = "smooth";
-        mostrarToast("Pronto! Interface carregada.");
+        const savedTheme = localStorage.getItem(THEME_KEY);
+        if (savedTheme) {
+          document.documentElement.dataset.theme = savedTheme;
+          $$("#themeToggle").setAttribute(
+            "aria-pressed",
+            savedTheme === "light"
+          );
+        }
       });
-
-      /* ---------------------------
-             Theme functions
-             --------------------------- */
-      const root = document.documentElement;
-      function applyTheme(theme) {
-        if (theme === "light") root.setAttribute("data-theme", "light");
-        else root.removeAttribute("data-theme");
-        localStorage.setItem(THEME_KEY, theme);
-        $$("#themeToggle").setAttribute(
-          "aria-pressed",
-          theme === "light" ? "true" : "false"
-        );
-      }
-      function toggleTheme() {
-        const current = localStorage.getItem(THEME_KEY) || "dark";
-        applyTheme(current === "dark" ? "light" : "dark");
-      }
-
-      /* ---------------------------
-             selecionar mesa
-             --------------------------- */
-      function selecionarMesa(num) {
-        num = parseInt(num);
-        if (!comandas[num]) comandas[num] = [];
-        mesaSelecionada = num;
-        $$$(".mesa-btn").forEach((b) => b.classList.remove("active"));
-        const btn = $$$(`.mesa-btn`).find(
-          (x) => parseInt(x.dataset.mesa) === num
-        );
-        if (btn) btn.classList.add("active");
-        salvarDados();
-        carregarCardapio();
-        atualizarTotal();
-        // auto-scroll para botão ativo (bom para touch)
-        try {
-          btn && btn.scrollIntoView({ behavior: "smooth", inline: "center" });
-        } catch (e) {}
-      }
-
-      /* ---------------------------
-             export util (if needed)
-             --------------------------- */
     </script>
   </body>
 </html>
